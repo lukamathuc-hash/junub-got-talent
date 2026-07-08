@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artist Application Form — Junub Got Talent</title>
+<style>
+  :root{
+    --navy:#0c1a3a;
+    --navy-deep:#081128;
+    --gold:#c9a227;
+    --gold-light:#e8c65a;
+    --cream:#faf7f0;
+    --ink:#1b2436;
+    --line:#d8cba3;
+    --red:#b3312c;
+    --green:#1f5c3c;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:#e9e4d6;
+    font-family:'Georgia', 'Times New Roman', serif;
+    color:var(--ink);
+    padding:24px 12px 80px;
+  }
+  .sheet{
+    max-width:880px;
+    margin:0 auto;
+    background:#fff;
+    box-shadow:0 8px 30px rgba(0,0,0,.15);
+    border-radius:6px;
+    overflow:hidden;
+  }
+  header.brand{
+    background:linear-gradient(180deg,var(--navy) 0%, var(--navy-deep) 100%);
+    color:#fff;
+    padding:22px 28px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    border-bottom:4px solid var(--gold);
+  }
+  .brand-left{display:flex;align-items:center;gap:16px;}
+  .crest{
+    width:64px;height:64px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #1c2c56, #0a1330);
+    border:2px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    font-family:Arial, sans-serif;font-size:9px;color:var(--gold-light);
+    text-align:center;line-height:1.1;flex-shrink:0;
+  }
+  .brand-title h1{
+    margin:0;font-family:'Trebuchet MS', Arial, sans-serif;
+    font-size:26px;letter-spacing:1px;color:var(--gold-light);
+  }
+  .brand-title p{margin:2px 0 0;font-size:13px;font-style:italic;color:#dfe3ee;}
+  .contact{font-family:Arial, sans-serif;font-size:12px;text-align:right;color:#cfd6e8;line-height:1.5;}
+  .flagbox{width:56px;text-align:center;font-family:Arial, sans-serif;font-size:9px;color:#cfd6e8;flex-shrink:0;}
+  .flagbox .flag{
+    width:56px;height:34px;border:1px solid #444;
+    background:repeating-linear-gradient(180deg,#0a3d21 0 8px,#fff 8px 10px,#000 10px 18px,#fff 18px 20px,#c8102e 20px 34px);
+    position:relative;margin-bottom:2px;
+  }
+  .titlebar{
+    background:var(--gold);
+    color:var(--navy-deep);
+    font-family:Arial, sans-serif;
+    font-weight:bold;
+    letter-spacing:.5px;
+    text-align:center;
+    padding:10px;
+    font-size:15px;
+  }
+  .subnote{
+    font-family:Arial, sans-serif;
+    font-size:12.5px;
+    text-align:center;
+    padding:10px 20px 4px;
+    color:#444;
+  }
+  .required-note{
+    font-family:Arial, sans-serif;
+    font-size:11.5px;
+    color:var(--red);
+    padding:0 28px 10px;
+  }
+  form{padding:6px 28px 28px;}
+  .section-head{
+    background:var(--navy);
+    color:var(--gold-light);
+    font-family:Arial, sans-serif;
+    font-weight:bold;
+    font-size:13.5px;
+    letter-spacing:.5px;
+    padding:9px 14px;
+    border-radius:4px;
+    margin:26px 0 16px;
+  }
+  .row{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    gap:16px;
+    margin-bottom:16px;
+  }
+  label{
+    display:block;
+    font-family:Arial, sans-serif;
+    font-size:12.5px;
+    font-weight:bold;
+    color:var(--navy);
+    margin-bottom:5px;
+  }
+  label .req{color:var(--red);}
+  input[type=text], input[type=email], input[type=tel], input[type=date], input[type=url], select, textarea{
+    width:100%;
+    padding:9px 10px;
+    border:1px solid var(--line);
+    border-radius:3px;
+    background:var(--cream);
+    font-family:Arial, sans-serif;
+    font-size:13.5px;
+    color:var(--ink);
+  }
+  input:focus, select:focus, textarea:focus{
+    outline:2px solid var(--gold);
+    outline-offset:1px;
+    background:#fff;
+  }
+  textarea{resize:vertical;min-height:90px;}
+  .hint{
+    font-family:Arial, sans-serif;
+    font-size:11.5px;
+    font-style:italic;
+    color:#777;
+    margin-top:4px;
+  }
+  .check-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(160px,1fr));
+    gap:10px 18px;
+    font-family:Arial, sans-serif;
+    font-size:13px;
+    margin-bottom:6px;
+  }
+  .check-grid label, .radio-grid label{
+    display:flex;align-items:center;gap:8px;
+    font-weight:normal;color:var(--ink);
+    margin-bottom:0;
+    cursor:pointer;
+  }
+  .radio-grid{
+    display:flex;flex-wrap:wrap;gap:18px;
+    font-family:Arial, sans-serif;font-size:13px;
+    margin-bottom:6px;
+  }
+  input[type=checkbox], input[type=radio]{
+    width:16px;height:16px;accent-color:var(--navy);
+    flex-shrink:0;
+  }
+  .field-label-plain{
+    font-family:Arial, sans-serif;
+    font-weight:bold;
+    font-size:13px;
+    color:var(--navy);
+    margin-bottom:8px;
+  }
+  .declare{
+    display:flex;gap:10px;align-items:flex-start;
+    font-family:Arial, sans-serif;font-size:12.5px;
+    padding:10px 0;border-bottom:1px solid #eee;
+  }
+  .declare input{margin-top:3px;flex-shrink:0;}
+  .quote{
+    background:var(--navy-deep);
+    color:var(--gold-light);
+    text-align:center;
+    font-style:italic;
+    padding:16px;
+    font-size:13.5px;
+    margin-top:28px;
+    border-radius:4px;
+  }
+  .submit-row{
+    text-align:center;
+    margin-top:28px;
+  }
+  button.submit-btn{
+    background:var(--navy);
+    color:var(--gold-light);
+    border:2px solid var(--gold);
+    font-family:Arial, sans-serif;
+    font-weight:bold;
+    font-size:15px;
+    letter-spacing:.5px;
+    padding:13px 34px;
+    border-radius:5px;
+    cursor:pointer;
+    transition:background .15s ease;
+  }
+  button.submit-btn:hover{background:var(--navy-deep);}
+  .submit-hint{
+    font-family:Arial, sans-serif;font-size:11.5px;color:#777;
+    margin-top:10px;
+  }
+  footer.pagefoot{
+    font-family:Arial, sans-serif;
+    font-size:11px;
+    color:#888;
+    text-align:center;
+    padding:16px;
+    border-top:1px solid #eee;
+  }
+  .error-msg{
+    display:none;
+    background:#fdeceb;
+    border:1px solid var(--red);
+    color:var(--red);
+    font-family:Arial, sans-serif;
+    font-size:12.5px;
+    padding:10px 14px;
+    border-radius:4px;
+    margin-bottom:18px;
+  }
+  @media (max-width:600px){
+    header.brand{flex-direction:column;text-align:center;}
+    .contact{text-align:center;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header class="brand">
+    <div class="brand-left">
+      <div class="crest">JUNUB<br>GOT<br>TALENT<br>★</div>
+      <div class="brand-title">
+        <h1>JUNUB GOT TALENT</h1>
+        <p>South Sudan's Premier Creative Talent Platform</p>
+      </div>
+    </div>
+    <div class="flagbox">
+      <div class="flag"></div>
+      Republic of<br>South Sudan
+    </div>
+  </header>
+
+  <div class="titlebar">ARTIST APPLICATION FORM — JGT SEASON 2026</div>
+  <div class="subnote">Complete all sections clearly. Fields marked <strong style="color:#b3312c">*</strong> are required.</div>
+  <div class="required-note">* Required field</div>
+
+  <form id="jgtForm">
+    <div class="error-msg" id="errorMsg">Please complete all required fields marked with *.</div>
+
+    <div class="section-head">1. PERSONAL INFORMATION</div>
+    <div class="row">
+      <div><label>First Name <span class="req">*</span></label><input type="text" id="firstName" required></div>
+      <div><label>Last Name <span class="req">*</span></label><input type="text" id="lastName" required></div>
+    </div>
+    <div class="row">
+      <div><label>Stage / Artist Name</label><input type="text" id="stageName"></div>
+      <div><label>Date of Birth <span class="req">*</span></label><input type="date" id="dob" required></div>
+      <div>
+        <label>Gender</label>
+        <select id="gender">
+          <option value="">Select</option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Prefer not to say</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div><label>Nationality</label><input type="text" id="nationality" value="South Sudanese"></div>
+      <div><label>National ID / Passport Number</label><input type="text" id="idNumber"></div>
+    </div>
+    <div class="row">
+      <div><label>Phone Number <span class="req">*</span></label><input type="tel" id="phone" required></div>
+      <div><label>WhatsApp Number</label><input type="tel" id="whatsapp"></div>
+    </div>
+    <div class="row">
+      <div><label>Email Address</label><input type="email" id="email"></div>
+    </div>
+
+    <div class="section-head">2. LOCATION</div>
+    <div class="row">
+      <div>
+        <label>State <span class="req">*</span></label>
+        <select id="state" required>
+          <option value="">Select state</option>
+          <option>Central Equatoria</option>
+          <option>Eastern Equatoria</option>
+          <option>Western Equatoria</option>
+          <option>Jonglei</option>
+          <option>Unity</option>
+          <option>Upper Nile</option>
+          <option>Warrap</option>
+          <option>Northern Bahr el Ghazal</option>
+          <option>Western Bahr el Ghazal</option>
+          <option>Lakes</option>
+          <option>Abyei Area</option>
+        </select>
+      </div>
+      <div><label>City / Town <span class="req">*</span></label><input type="text" id="city" required></div>
+      <div><label>Payam / Area</label><input type="text" id="payam"></div>
+    </div>
+
+    <div class="section-head">3. TALENT &amp; EXPERIENCE</div>
+    <div class="field-label-plain">Talent Category (tick all that apply) <span class="req">*</span></div>
+    <div class="check-grid" id="talentGrid">
+      <label><input type="checkbox" value="Music / Singing"> Music / Singing</label>
+      <label><input type="checkbox" value="Rap / Hip-Hop"> Rap / Hip-Hop</label>
+      <label><input type="checkbox" value="Dance"> Dance</label>
+      <label><input type="checkbox" value="Instrument"> Instrument</label>
+      <label><input type="checkbox" value="Acting / Drama"> Acting / Drama</label>
+      <label><input type="checkbox" value="Visual Art"> Visual Art</label>
+      <label><input type="checkbox" value="Poetry / Spoken Word"> Poetry / Spoken Word</label>
+      <label><input type="checkbox" value="Comedy / MC"> Comedy / MC</label>
+      <label><input type="checkbox" value="Film / Video"> Film / Video</label>
+      <label><input type="checkbox" value="Digital Creation"> Digital Creation</label>
+      <label><input type="checkbox" value="Photography"> Photography</label>
+      <label><input type="checkbox" value="Other"> Other</label>
+    </div>
+
+    <div class="field-label-plain" style="margin-top:18px;">Experience Level <span class="req">*</span></div>
+    <div class="radio-grid" id="expGrid">
+      <label><input type="radio" name="exp" value="Beginner (0-1 yrs)"> Beginner (0-1 yrs)</label>
+      <label><input type="radio" name="exp" value="Developing (1-3 yrs)"> Developing (1-3 yrs)</label>
+      <label><input type="radio" name="exp" value="Experienced (3-6 yrs)"> Experienced (3-6 yrs)</label>
+      <label><input type="radio" name="exp" value="Professional (6+ yrs)"> Professional (6+ yrs)</label>
+    </div>
+
+    <div class="field-label-plain" style="margin-top:18px;">Have you performed publicly before? <span class="req">*</span></div>
+    <div class="radio-grid" id="performGrid">
+      <label><input type="radio" name="perform" value="Yes — many times"> Yes — many times</label>
+      <label><input type="radio" name="perform" value="Yes — a few times"> Yes — a few times</label>
+      <label><input type="radio" name="perform" value="No — this would be my first time"> No — this would be my first time</label>
+    </div>
+
+    <div class="section-head">4. ABOUT YOUR TALENT</div>
+    <label>Describe your talent and what makes you unique: <span class="req">*</span></label>
+    <textarea id="describeTalent" required></textarea>
+
+    <div class="section-head">5. SOCIAL MEDIA &amp; WORK SAMPLES</div>
+    <label>Video / Performance Link (YouTube, TikTok, Facebook) <span class="req">*</span></label>
+    <input type="url" id="videoLink" required>
+    <div class="hint">Upload a video of your performance and paste the link above.</div>
+
+    <div style="margin-top:16px;">
+      <label>Audio / Music Link (SoundCloud, Audiomack, Google Drive)</label>
+      <input type="url" id="audioLink">
+    </div>
+
+    <div class="row" style="margin-top:16px;">
+      <div><label>TikTok Username</label><input type="text" id="tiktok"></div>
+      <div><label>Instagram Username</label><input type="text" id="instagram"></div>
+    </div>
+    <div class="row">
+      <div><label>Facebook Profile / Page</label><input type="text" id="facebook"></div>
+      <div><label>YouTube Channel</label><input type="text" id="youtube"></div>
+    </div>
+
+    <div class="section-head">6. WHY JUNUB GOT TALENT?</div>
+    <label>Why do you want to join JGT? What will you bring to the platform? <span class="req">*</span></label>
+    <textarea id="whyJoin" required></textarea>
+
+    <div style="margin-top:16px;">
+      <label>What is your biggest dream as an artist?</label>
+      <textarea id="dream"></textarea>
+    </div>
+
+    <div class="section-head">7. HOW DID YOU HEAR ABOUT JGT?</div>
+    <div class="check-grid" id="hearGrid">
+      <label><input type="checkbox" value="Social Media"> Social Media</label>
+      <label><input type="checkbox" value="Friend / Family"> Friend / Family</label>
+      <label><input type="checkbox" value="ICON DEGREAT directly"> ICON DEGREAT directly</label>
+      <label><input type="checkbox" value="Radio / TV"> Radio / TV</label>
+      <label><input type="checkbox" value="Community Event"> Community Event</label>
+      <label><input type="checkbox" value="Other"> Other</label>
+    </div>
+
+    <div class="section-head">8. DECLARATION &amp; AGREEMENT</div>
+    <div class="declare">
+      <input type="checkbox" id="d1" required>
+      <label for="d1">I confirm that all information provided in this form is true and accurate. I understand that providing false information will result in disqualification.</label>
+    </div>
+    <div class="declare">
+      <input type="checkbox" id="d2" required>
+      <label for="d2">I agree to uphold the JGT Code of Conduct: Originality, Professionalism, and Unity. I understand that JGT membership may be revoked for misconduct.</label>
+    </div>
+    <div class="declare">
+      <input type="checkbox" id="d3" required>
+      <label for="d3">I give Junub Got Talent permission to use my submitted media and information for promotional purposes related to the JGT platform and its activities.</label>
+    </div>
+    <div class="declare">
+      <input type="checkbox" id="d4" required>
+      <label for="d4">I understand that submission of this form does not guarantee acceptance, and that JGT reserves the right to make final decisions on all applications.</label>
+    </div>
+
+    <div class="row" style="margin-top:20px;">
+      <div><label>Applicant Name <span class="req">*</span></label><input type="text" id="applicantName" required></div>
+      <div><label>Date <span class="req">*</span></label><input type="date" id="applicantDate" required></div>
+    </div>
+
+    <div class="quote">"They didn't give me a seat — so I built the throne." — ICON DEGREAT, CEO &amp; Founder</div>
+
+    <div class="submit-row">
+      <button type="submit" class="submit-btn">Submit Application</button>
+      <div class="submit-hint">This opens your email app with your answers filled in, addressed to lukamathuc@gmail.com. Just hit send.</div>
+    </div>
+  </form>
+
+  <footer class="pagefoot">JUNUB GOT TALENT · CEO: ICON DEGREAT · NC: 000453754 · Juba, South Sudan</footer>
+</div>
+
+<script>
+document.getElementById('jgtForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const errorMsg = document.getElementById('errorMsg');
+
+  const talents = Array.from(document.querySelectorAll('#talentGrid input:checked')).map(i=>i.value);
+  const exp = document.querySelector('input[name=exp]:checked');
+  const perform = document.querySelector('input[name=perform]:checked');
+  const hear = Array.from(document.querySelectorAll('#hearGrid input:checked')).map(i=>i.value);
+
+  const required = [
+    document.getElementById('firstName').value,
+    document.getElementById('lastName').value,
+    document.getElementById('dob').value,
+    document.getElementById('phone').value,
+    document.getElementById('state').value,
+    document.getElementById('city').value,
+    document.getElementById('describeTalent').value,
+    document.getElementById('videoLink').value,
+    document.getElementById('whyJoin').value,
+    document.getElementById('applicantName').value,
+    document.getElementById('applicantDate').value
+  ];
+
+  const declarations = [
+    document.getElementById('d1').checked,
+    document.getElementById('d2').checked,
+    document.getElementById('d3').checked,
+    document.getElementById('d4').checked
+  ];
+
+  const missingRequired = required.some(v => !v);
+  const missingChoices = talents.length === 0 || !exp || !perform;
+  const missingDeclarations = declarations.some(v => !v);
+
+  if(missingRequired || missingChoices || missingDeclarations){
+    errorMsg.style.display = 'block';
+    errorMsg.scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+  errorMsg.style.display = 'none';
+
+  const val = id => document.getElementById(id).value || '—';
+
+  const body = `ARTIST APPLICATION FORM — JGT SEASON 2026
+
+1. PERSONAL INFORMATION
+First Name: ${val('firstName')}
+Last Name: ${val('lastName')}
+Stage / Artist Name: ${val('stageName')}
+Date of Birth: ${val('dob')}
+Gender: ${val('gender')}
+Nationality: ${val('nationality')}
+National ID / Passport Number: ${val('idNumber')}
+Phone Number: ${val('phone')}
+WhatsApp Number: ${val('whatsapp')}
+Email Address: ${val('email')}
+
+2. LOCATION
+State: ${val('state')}
+City / Town: ${val('city')}
+Payam / Area: ${val('payam')}
+
+3. TALENT & EXPERIENCE
+Talent Category: ${talents.join(', ')}
+Experience Level: ${exp.value}
+Performed publicly before: ${perform.value}
+
+4. ABOUT YOUR TALENT
+${val('describeTalent')}
+
+5. SOCIAL MEDIA & WORK SAMPLES
+Video / Performance Link: ${val('videoLink')}
+Audio / Music Link: ${val('audioLink')}
+TikTok Username: ${val('tiktok')}
+Instagram Username: ${val('instagram')}
+Facebook Profile / Page: ${val('facebook')}
+YouTube Channel: ${val('youtube')}
+
+6. WHY JUNUB GOT TALENT?
+Why join JGT: ${val('whyJoin')}
+Biggest dream as an artist: ${val('dream')}
+
+7. HOW DID YOU HEAR ABOUT JGT?
+${hear.length ? hear.join(', ') : '—'}
+
+8. DECLARATION & AGREEMENT
+All four declarations confirmed: Yes
+Applicant Name: ${val('applicantName')}
+Date: ${val('applicantDate')}
+`;
+
+  const subject = encodeURIComponent(`JGT Artist Application — ${val('firstName')} ${val('lastName')}`);
+  const mailto = `mailto:lukamathuc@gmail.com?subject=${subject}&body=${encodeURIComponent(body)}`;
+  window.location.href = mailto;
+});
+</script>
+</body>
+</html>
